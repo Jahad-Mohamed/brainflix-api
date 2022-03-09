@@ -7,7 +7,6 @@ const uniqid = require("uniqid");
 
 router
   .get("/", (req, res) => {
-    // const fileContent = JSON.parse(fs.readFileSync("./data/videos.json"));
     const fileContent = readFile("./data/videos.json");
     res.status(200).json(fileContent);
   })
@@ -20,13 +19,27 @@ router
   });
 
 router.post("/", (req, res) => {
-  // axios.post("/videos", {title: "title", content: "content"})
-
-  console.log(req.body);
   const newVideo = {
     id: uniqid(),
     title: req.body.title,
-    content: req.body.content,
+    channel: "Brainflix",
+    image: "https://i.imgur.com/i6S8m7I.jpg",
+    description: req.body.description,
+    views: "100,000",
+    likes: "100,000",
+    duration: "4:01",
+    video: "https://project-2-api.herokuapp.com/stream",
+    timestamp: new Date().getTime(),
+    comments: [
+      {
+        id: uniqid(),
+        name: "Martin Evergreen",
+        comment:
+          "I’ve loved trains ever since I was a child. I dreamed about riding one around the world. This is the most fantastic thing I’ve seen yet, and I’m watching it ON a train!",
+        likes: 3,
+        timestamp: new Date().getTime(),
+      },
+    ],
   };
   const fileContent = readFile("./data/videos.json");
   fileContent.push(newVideo);
