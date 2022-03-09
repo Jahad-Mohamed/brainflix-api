@@ -5,6 +5,7 @@ const readFile = require("./utils/helpers");
 const uniqid = require("uniqid");
 const videosRoutes = require("./routes/videosRouter");
 const cors = require("cors");
+const path = require("path");
 
 const port = 8080;
 app.use(express.static(path.join(__dirname, "public")));

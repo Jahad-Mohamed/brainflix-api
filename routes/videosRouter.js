@@ -19,12 +19,14 @@ router
   });
 
 router.post("/", (req, res) => {
+  const { title, description, img } = req.body;
+
   const newVideo = {
     id: uniqid(),
-    title: req.body.title,
+    title: title,
     channel: "Brainflix",
-    image: "https://i.imgur.com/i6S8m7I.jpg",
-    description: req.body.description,
+    image: img,
+    description: description,
     views: "100,000",
     likes: "100,000",
     duration: "4:01",
