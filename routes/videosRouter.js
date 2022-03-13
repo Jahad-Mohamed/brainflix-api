@@ -19,35 +19,40 @@ router
   });
 
 router.post("/", (req, res) => {
-  const { title, description, img } = req.body;
+  try {
+    const { title, description, img } = req.body;
 
-  const newVideo = {
-    id: uniqid(),
-    title: title,
-    channel: "Brainflix",
-    image: img,
-    description: description,
-    views: "100,000",
-    likes: "100,000",
-    duration: "4:01",
-    video: "https://project-2-api.herokuapp.com/stream",
-    timestamp: new Date().getTime(),
-    comments: [
-      {
-        id: uniqid(),
-        name: "Martin Evergreen",
-        comment:
-          "I’ve loved trains ever since I was a child. I dreamed about riding one around the world. This is the most fantastic thing I’ve seen yet, and I’m watching it ON a train!",
-        likes: 3,
-        timestamp: new Date().getTime(),
-      },
-    ],
-  };
-  const fileContent = readFile("./data/videos.json");
-  fileContent.push(newVideo);
-  fs.writeFileSync("./data/videos.json", JSON.stringify(fileContent));
+    console.log(req.body);
+    const newVideo = {
+      id: uniqid(),
+      title: title,
+      channel: "Brainflix",
+      image: img,
+      description: description,
+      views: "100,000",
+      likes: "100,000",
+      duration: "4:01",
+      video: "https://project-2-api.herokuapp.com/stream",
+      timestamp: new Date().getTime(),
+      comments: [
+        {
+          id: uniqid(),
+          name: "Martin Evergreen",
+          comment:
+            "I’ve loved trains ever since I was a child. I dreamed about riding one around the world. This is the most fantastic thing I’ve seen yet, and I’m watching it ON a train!",
+          likes: 3,
+          timestamp: new Date().getTime(),
+        },
+      ],
+    };
+    const fileContent = readFile("./data/videos.json");
+    fileContent.push(newVideo);
+    fs.writeFileSync("./data/videos.json", JSON.stringify(fileContent));
 
-  res.status(201).json(newVideo);
+    res.status(201).json(newVideo);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;
